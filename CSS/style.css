@@ -2,6 +2,7 @@
   --globe-width: 14px;
   --globe-height: 28px;
   --globe-spacing: 40px;
+  --initial-transparency: .5;
 }
 
 *, *::before, *::after {
@@ -19,11 +20,9 @@ ul.lightrope {
   top: 0;
   left: 0;
   width: 100vw;
-  /* height: 100vh; */
   margin: -15px 0 0 0;
   list-style: none;
   overflow: hidden;
-  /* background-color: lightblue; */
   white-space: nowrap;
   z-index: 1;
 }
@@ -35,18 +34,63 @@ li {
   height: var(--globe-height);
   border-radius: 50%;
   margin: calc(var(--globe-spacing) / 2);
-  background-color: rgba(0,247,165,1);
-  box-shadow: 0px var(--globe-height)/6 var(--globe-width)*2 var(--globe-spread) rgba(0,247,165,1);
+  /* box-shadow: 0px var(--globe-height)/6 var(--globe-width)*2 var(--globe-spread) rgba(0,247,165,1); */
+}
+
+li:nth-child(4n+4) {
+  background-color: rgba(0,247,165,var(--initial-transparency));
+  animation-name: flash1;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
 }
 
 li:nth-child(2n+1) {
-  background: rgba(0,255,255,1);
-  box-shadow: 0px var(--globe-height)/6 var(--globe-width)*2 var(--globe-spread) rgba(0,255,255,0.5);
+  background: rgba(0,255,255,var(--initial-transparency));
+  /* box-shadow: 0px var(--globe-height)/6 var(--globe-width)*2 var(--globe-spread) rgba(0,255,255,0.5); */
+  /* animation: flash2 2s ease-in-out 1.4s infinite both; */
+  animation-name: flash2;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 1.4s;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
 }
 
 li:nth-child(4n+2) {
-  background: rgba(247,0,148,1);
-  box-shadow: 0px var(--globe-height)/6 var(--globe-width)*2 var(--globe-spread) rgba(247,0,148,1);
+  background: rgba(247,0,148,var(--initial-transparency));
+  /* box-shadow: 0px var(--globe-height)/6 var(--globe-width)*2 var(--globe-spread) rgba(247,0,148,1); */
+  /* animation: flash3 2s ease-in-out 1.9s infinite both; */
+  animation-name: flash3;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 1.9s;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+}
+
+@keyframes flash1 {
+  50% {
+    background-color: rgba(0,247,165,1);
+  }
+}
+
+@keyframes flash2 {
+  50% {
+    background-color: rgba(0,255,255,1);
+  }
+}
+
+@keyframes flash3 {
+  50% {
+    background-color: rgba(247,0,148,1);
+  }
+}
+
+li.paused {
+  animation-play-state: paused;
 }
 
 li::before {
@@ -78,4 +122,17 @@ li::after {
 .buttons-container {
   text-align: center;
   margin: 30px;
+}
+
+.button {
+  padding: .5em .8em;
+  font-size: 1.2em;
+  border-radius: 25%;
+  border-color: rgb(238, 232, 232);
+}
+
+.button:hover {
+  color: white;
+  background-color: black;
+  border-color: white;
 }
